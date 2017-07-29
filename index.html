@@ -6,16 +6,14 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
     <title>Document</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" rel="stylesheet"/>
-    <!-- Tocas UI：CSS 與元件-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocas-ui/2.3.2/tocas.css"/>
     <link href="css/all.css" rel="stylesheet"/>
-    <!-- Tocas JS：模塊與 JavaScript 函式-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tocas-ui/2.3.2/tocas.js"></script>
     <script src="js/vendors.js"></script>
     <script src="js/all.js"></script>
   </head>
   <body>
-    <div class="wrap app">
+    <div id="app" class="wrap">
       <div class="ts heading slate"><span class="header">颱風防災資訊平台</span><span class="description">防災災情及相關諮詢電話：87863119分機8900~8907</span></div>
       <select name="" v-model="area" class="ts fluid basic dropdown">
         <option value="全部">全部</option>
@@ -32,10 +30,10 @@
         <option value="北投區">北投區</option>
         <option value="內湖區">內湖區</option>
       </select>
-      <div v-for="data in disasterData" v-if="filterArea(data)" class="ts segmented list">
+      <div class="ts segmented list">
         <div class="selected item">時間 區域 位置 描述</div>
-        <div class="item">{{data.CaseLocationDistrict}}</div>
-        <div class="item">栗宮希實</div>
+        <div class="item">{{message}}</div>
+        <div class="item"> </div>
       </div>
     </div>
   </body>
