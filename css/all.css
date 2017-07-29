@@ -5,4 +5,37 @@ body {
   max-width: 800px;
   margin: 20px auto 0 auto; }
 
+.item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  text-align: center; }
+  .item .time {
+    -webkit-box-flex: 1;
+        -ms-flex: 1 20px;
+            flex: 1 20px;
+    margin: 0 5px; }
+  .item .area {
+    -webkit-box-flex: 1;
+        -ms-flex: 1 20px;
+            flex: 1 20px;
+    margin: 0 5px; }
+  .item .location {
+    -webkit-box-flex: 3;
+        -ms-flex: 3 20px;
+            flex: 3 20px;
+    text-align: justify;
+    text-justify: auto;
+    margin: 0 5px; }
+  .item .detail {
+    -webkit-box-flex: 3;
+        -ms-flex: 3 20px;
+            flex: 3 20px;
+    text-align: justify;
+    text-justify: auto;
+    margin: 0 5px; }
+
 /*# sourceMappingURL=all.css.map */
