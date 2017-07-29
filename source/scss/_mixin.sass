@@ -1,0 +1,32 @@
+// mixin
+// 文字齊頭尾
+@mixin text-justify 
+    text-align: justify
+    text-justify: auto
+
+// 隱藏文字
+@mixin hide-text
+    text-indent: 110%
+    white-space: nowrap
+    overflow: hidden
+
+// 元件置中
+@mixin el-center
+    position: absolute
+    top: 50%
+    left: 30%
+    transform: translate(-50%,-50%)
+
+// RWD
+@mixin pad
+    @media(max-width:768px)
+        @content
+@mixin phone
+    @media(max-width:480px)
+        @content
+@mixin pc-pad
+    @media(min-width: 768px) and (max-width: 992px)
+        @content
+@mixin pad-phone
+    @media(max-width: 680px)
+        @content

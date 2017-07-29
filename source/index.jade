@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        meta(http-equiv="X-UA-Compatible", content="ie=edge")
+        title Document
+        link(href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css", rel="stylesheet")
+        
+        // Tocas UI：CSS 與元件
+        link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/tocas-ui/2.3.2/tocas.css')
+        link(href="css/all.css", rel="stylesheet")
+        
+        // Tocas JS：模塊與 JavaScript 函式
+        script(src='https://cdnjs.cloudflare.com/ajax/libs/tocas-ui/2.3.2/tocas.js')
+        script(src="js/vendors.js")
+        script(src="js/all.js")
+        
+    body
+        .wrap.app
+            .ts.heading.slate
+                span.header 颱風防災資訊平台
+                span.description 防災災情及相關諮詢電話：87863119分機8900~8907
+            select.ts.fluid.basic.dropdown(name='',v-model='area')
+                option(value='全部') 全部
+                option(value='萬華區') 萬華區
+                option(value='中正區') 中正區
+                option(value='大同區') 大同區
+                option(value='中山區') 中山區
+                option(value='大安區') 大安區
+                option(value='南港區') 南港區
+                option(value='文山區') 文山區
+                option(value='松山區') 松山區
+                option(value='信義區') 信義區
+                option(value='士林區') 士林區
+                option(value='北投區') 北投區
+                option(value='內湖區') 內湖區
+            .ts.segmented.list(v-for='data in disasterData', v-if='filterArea(data)')
+                .selected.item 時間 區域 位置 描述
+                .item {{data.CaseLocationDistrict}}
+                .item 栗宮希實
+            
+                
+
