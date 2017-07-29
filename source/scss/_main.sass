@@ -3,3 +3,21 @@ body
 .wrap
     max-width: 800px
     margin: 20px auto 0 auto
+.item
+    display: flex
+    justify-content: space-between
+    text-align: center
+    .time
+        flex: 1 20px
+        margin: 0 5px
+    .area
+        flex: 1 20px
+        margin: 0 5px
+    .location
+        flex: 3 20px
+        @include text-justify
+        margin: 0 5px
+    .detail
+        flex: 3 20px
+        @include text-justify
+        margin: 0 5px
