@@ -13,8 +13,7 @@ html(lang="en")
         
         //- Tocas JS：模塊與 JavaScript 函式
         script(src='https://cdnjs.cloudflare.com/ajax/libs/tocas-ui/2.3.2/tocas.js')
-        script(src="js/vendors.js")
-        script(src="js/all.js")
+        
         
     body
         .wrap#app
@@ -35,4 +34,10 @@ html(lang="en")
                     span.ts.primary.label.area 北投區
                     span.location 承德路七段往立德路方向，大度路二段(地標為測速照相機)，內線第1~2車道,交叉路口: 大業路 , 大度路
                     span.detail 路樹倒塌 造成市民車輛行車撞到受損(仍有1線車道可供通行)
+                    
+            .ts.segmented.list
                 .item {{message}}
+            //- .ts.segmented.list.show
+                .item 
+        script(src="js/vendors.js")
+        script(src="js/all.js")

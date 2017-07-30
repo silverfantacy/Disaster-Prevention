@@ -78,8 +78,6 @@ gulp.task('babel', () => {
 
 //Bower 取得檔案
 gulp.task('bower', function() {
-    return gulp.src(mainBowerFiles())
-        .pipe(gulp.dest('./.tmp/vendors'))
     return gulp.src(mainBowerFiles({
         "overrides": {
             "vue": {                       // 套件名稱
@@ -98,7 +96,7 @@ gulp.task('vendorJs', ['bower'], function(){  // [優先執行的排程]
             'jquery.js',
             'tether.js',
             'bootstrap.js',
-            'vue.runtime.common.js',
+            'vue.js',
             '**/*.js'
         ]))
         .pipe($.concat('vendors.js'))//合併js
