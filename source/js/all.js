@@ -1,26 +1,43 @@
-var app = new Vue({
-  el:'#app',
-  data: {
-    message : 'Hello World！'
-  }
-})
+const apiUrl = 'https://tcgbusfs.blob.core.windows.net/blobfs/GetDisasterSummary.json'; //將apiUrl設定為常數不再變動。
 
-var locationData = '';
-var xhr = new XMLHttpRequest();
-xhr.open('get', 'https://tcgbusfs.blob.core.windows.net/blobfs/GetDisasterSummary.json', true);
-xhr.send(null);
-xhr.onload = function () {
-    var str = JSON.parse(xhr.responseText);
-    locationData=str.DataSet['diffgr:diffgram'].NewDataSet.CASE_SUMMARY;
-    //   撈到資料後再執行你要執行的 function
-    renderHTML()
-}
-function renderHTML() {
-    var str ='';
-    var len = locationData.length;
-    console.log(locationData);
-    for(var i = 0;len>i;i++){
-      str+= '<li>'+locationData[i].CaseLocationDistrict+'：'+locationData[i].CaseDescription+'</li>';
+var app = new Vue({
+  el: '#app',
+  data: {
+    area: '全部',
+    disasterData: null,
+    showinfo: null
+  },
+  created: function () {
+    //執行
+    this.callData()
+  },
+  methods: {
+    filterArea: function (item) {
+      if (this.area == '全部') {
+        return true
+      } else if (item.CaseLocationDistrict == this.area) {
+        return true
+      }
+    },
+    callData: function () {
+      // GET /someUrl
+      this.$http.get(apiUrl).then(response => {
+
+
+        // 獲取災害資訊
+        this.disasterData = response.body.DataSet['diffgr:diffgram'].NewDataSet.CASE_SUMMARY;
+
+        this.showinfo = response.status;
+
+      }, response => {
+        this.showinfo = response.status;
+      });
     }
-    document.querySelector('.show').innerHTML = str;
-}
+
+
+  }
+
+  /*https://github.com/pagekit/vue-resource*/
+  /*VUE RESOURCE*/
+
+})

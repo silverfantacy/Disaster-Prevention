@@ -13,6 +13,8 @@ body
     .area
         flex: 1 20px
         margin: 0 5px
+        @include phone()
+            display: none
     .location
         flex: 3 20px
         @include text-justify
