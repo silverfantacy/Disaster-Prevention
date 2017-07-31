@@ -12,31 +12,30 @@
   </head>
   <body>
     <div id="app" class="wrap">
-      <div class="ts heading slate"><span class="header">颱風防災資訊平台</span><span class="description">防災災情及相關諮詢電話：87863119分機8900~8907</span></div>
-      <select name="" v-model="area" class="ts fluid basic dropdown">
-        <option value="全部">全部</option>
-        <option value="萬華區">萬華區</option>
-        <option value="中正區">中正區</option>
-        <option value="大同區">大同區</option>
-        <option value="中山區">中山區</option>
-        <option value="大安區">大安區</option>
-        <option value="南港區">南港區</option>
-        <option value="文山區">文山區</option>
-        <option value="松山區">松山區</option>
-        <option value="信義區">信義區</option>
-        <option value="士林區">士林區</option>
-        <option value="北投區">北投區</option>
-        <option value="內湖區">內湖區</option>
-      </select>
-      <div class="ts segmented list">
-        <div class="selected item"> <span class="time">時間</span><span class="area">區域</span><span style="text-align: center" class="location">位置</span><span style="text-align: center" class="detail">描述</span></div>
-        <div class="item"> <span class="time">2017-07-30 01:32:47 </span><span class="ts primary label area">北投區</span><span class="location">承德路七段往立德路方向，大度路二段(地標為測速照相機)，內線第1~2車道,交叉路口: 大業路 , 大度路</span><span class="detail">路樹倒塌 造成市民車輛行車撞到受損(仍有1線車道可供通行)</span></div>
-      </div>
-      <div class="ts segmented list">
-        <div class="item">{{message}}</div>
+      <div class="ts heading slate"><span class="header">颱風防災資訊平台</span><span class="description">防災災情及相關諮詢電話：87863119分機8900~8907</span>
+        <select name="" v-model="area" class="ts fluid basic dropdown">
+          <option value="全部">全部</option>
+          <option value="萬華區">萬華區</option>
+          <option value="中正區">中正區</option>
+          <option value="大同區">大同區</option>
+          <option value="中山區">中山區</option>
+          <option value="大安區">大安區</option>
+          <option value="南港區">南港區</option>
+          <option value="文山區">文山區</option>
+          <option value="松山區">松山區</option>
+          <option value="信義區">信義區</option>
+          <option value="士林區">士林區</option>
+          <option value="北投區">北投區</option>
+          <option value="內湖區">內湖區</option>
+        </select>
+        <div class="ts segmented list">
+          <div class="selected item"> <span class="time">時間</span><span class="area">區域</span><span style="text-align: center" class="detail">描述</span><span style="text-align: center" class="location">位置</span></div>
+          <div v-for="data in disasterData" v-if="filterArea(data)" class="item"><span class="time">{{data.CaseTime}}</span><span class="ts primary label area">{{data.CaseLocationDistrict}}</span><span class="detail">{{data.CaseDescription}}</span><span class="location">{{data.CaseLocationDescription}}</span></div>
+        </div>
       </div>
     </div>
     <script src="js/vendors.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue-resource@1.3.4"></script>
     <script src="js/all.js"></script>
   </body>
 </html>

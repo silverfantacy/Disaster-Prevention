@@ -23,6 +23,9 @@ body {
         -ms-flex: 1 20px;
             flex: 1 20px;
     margin: 0 5px; }
+    @media (max-width: 480px) {
+      .item .area {
+        display: none; } }
   .item .location {
     -webkit-box-flex: 3;
         -ms-flex: 3 20px;
