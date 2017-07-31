@@ -1,45 +1,29 @@
-<!DOCTYPE html>
-html(lang="en")
-    head
-        meta(charset="UTF-8")
-        meta(name="viewport", content="width=device-width, initial-scale=1.0")
-        meta(http-equiv="X-UA-Compatible", content="ie=edge")
-        title Document
-        link(href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css", rel="stylesheet")
-        
-        //- Tocas UI：CSS 與元件
-        link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/tocas-ui/2.3.2/tocas.css')
-        link(href="css/all.css", rel="stylesheet")
-        
-        //- Tocas JS：模塊與 JavaScript 函式
-        script(src='https://cdnjs.cloudflare.com/ajax/libs/tocas-ui/2.3.2/tocas.js')
-        
-        
-    body
-        .wrap#app
-            .ts.heading.slate
-                span.header 颱風防災資訊平台
-                span.description 防災災情及相關諮詢電話：87863119分機8900~8907
-                select.ts.fluid.basic.dropdown(name='',v-model='area')
-                    each iteam in area.list
-                        option(value='#{iteam}') #{iteam}
-                .ts.segmented.list
-                    .selected.item 
-                        span.time 時間
-                        span.area 區域
-                        span.detail(style='text-align: center') 描述
-                        span.location(style='text-align: center') 位置
-                    .item(v-for='data in disasterData', v-if="filterArea(data)")
-                        span.time {{data.CaseTime}}
-                        span.ts.primary.label.area {{data.CaseLocationDistrict}}
-                        span.detail {{data.CaseDescription}}
-                        span.location {{data.CaseLocationDescription}}
-                //- .item 
-                //-     span.time 2017-07-30 01:32:47 
-                //-     span.ts.primary.label.area 北投區
-                //-     span.location 承德路七段往立德路方向，大度路二段(地標為測速照相機)，內線第1~2車道,交叉路口: 大業路 , 大度路
-                //-     span.detail 路樹倒塌 造成市民車輛行車撞到受損(仍有1線車道可供通行)
-                
-        script(src="js/vendors.js")
-        script(src='https://cdn.jsdelivr.net/npm/vue-resource@1.3.4')
-        script(src="js/all.js")
+extends layout.jade
+block content
+    .wrap#app
+        .ts.heading.slate
+            span.header 颱風防災資訊平台
+            span.description 防災災情及相關諮詢電話：87863119 分機8900~8907
+            select.ts.fluid.basic.dropdown(name='',v-model='area')
+                each iteam in area.list
+                    option(value='#{iteam}') #{iteam}
+            .ts.segmented.list
+                .selected.item 
+                    span.time 時間
+                    span.area 區域
+                    span.detail(style='text-align: center') 描述
+                    span.location(style='text-align: center') 位置
+                .item(v-for='data in disasterData', v-if="filterArea(data)")
+                    span.time {{data.CaseTime}}
+                    span.ts.primary.label.area {{data.CaseLocationDistrict}}
+                    span.detail {{data.CaseDescription}}
+                    span.location {{data.CaseLocationDescription}}
+            //- .item 
+            //-     span.time 2017-07-30 01:32:47 
+            //-     span.ts.primary.label.area 北投區
+            //-     span.location 承德路七段往立德路方向，大度路二段(地標為測速照相機)，內線第1~2車道,交叉路口: 大業路 , 大度路
+            //-     span.detail 路樹倒塌 造成市民車輛行車撞到受損(仍有1線車道可供通行)
+            
+    script(src="js/vendors.js")
+    script(src='https://cdn.jsdelivr.net/npm/vue-resource@1.3.4')
+    script(src="js/all.js")
