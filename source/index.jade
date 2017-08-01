@@ -4,6 +4,9 @@ block content
         .ts.heading.slate
             span.header 颱風防災資訊平台
             span.description 防災災情及相關諮詢電話：87863119 分機8900~8907
+            a.ts.button#mapBtn(href="map.html")
+                i.map.icon
+                | Map
             select.ts.fluid.basic.dropdown(name='',v-model='area')
                 each iteam in area.list
                     option(value='#{iteam}') #{iteam}
