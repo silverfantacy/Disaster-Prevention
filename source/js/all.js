@@ -49,12 +49,12 @@ function initMap(data) {
     },
     zoom: 13
   });
-  for (i = 0; i < data.length; i++) {
+  for (var i = 0; i < data.length; i++) {
     var str = {};
     var place = {};
 
-    place.lat = parseFloat(data[i].Wgs84X);
-    place.lng = parseFloat(data[i].Wgs84Y);
+    place.lat = parseFloat(data[i].Wgs84Y);
+    place.lng = parseFloat(data[i].Wgs84X);
 
     str.map = map;
     str.title = data[i].Name;
