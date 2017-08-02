@@ -61,6 +61,7 @@ function initMap(data) {
     str.map = map;
     str.title = data[i].Name;
     str.position = place;
+    str.icon = 'https://developers.google.com/maps/documentation/javascript/images/circle.png';
     // console.log(place);
     new google.maps.Marker(str);
   }
