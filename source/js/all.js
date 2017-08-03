@@ -5,21 +5,14 @@ var app = new Vue({
   data: {
     area: '全部',
     disasterData: null,
+    showDisaster: null,
     showinfo: null
   },
   created: function () {
     //執行
     this.callData()
   },
-  methods: {
-    filterArea: function (item) {
-      //篩選區域
-      if (this.area == '全部') {
-        return true;
-      } else if (item.CaseLocationDistrict == this.area) {
-        return true;
-      }
-    },
+  computed: {
     callData: function () {
       // GET /someUrl
       this.$http.get(apiUrl).then(response => {
@@ -32,6 +25,16 @@ var app = new Vue({
       }, response => {
         this.showinfo = response.status;
       });
+    }
+  },
+  methods: {
+    filterArea: function (item) {
+      //篩選區域
+      if (this.area == '全部') {
+        return true;
+      } else if (item.CaseLocationDistrict == this.area) {
+        return true;
+      }
     }
   }
   /*https://github.com/pagekit/vue-resource*/
