@@ -93,7 +93,7 @@ gulp.task('bower', function() {
 gulp.task('vendorJs', ['bower'], function(){  // [優先執行的排程]
     return gulp.src('./.tmp/vendors/**/**.js')
         .pipe($.order([
-            // 'jquery.js',
+            'jquery.js',
             // 'tether.js',
             // 'bootstrap.js',
             'vue.js',

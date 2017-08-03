@@ -6,7 +6,10 @@ var app = new Vue({
     area: '全部',
     disasterData: null,
     showDisaster: null,
-    showinfo: null
+    showinfo: null,
+    countOfPage: 50, //一頁顯示50筆
+    currPage: 1, //第一頁
+    rows: []
   },
   created: function () {
     //執行
@@ -20,11 +23,20 @@ var app = new Vue({
         // 獲取災害資訊，取得資料
         this.disasterData = response.body.DataSet['diffgr:diffgram'].NewDataSet.CASE_SUMMARY;
         initMap(this.disasterData);
+        this.rows = response.body.DataSet['diffgr:diffgram'].NewDataSet.CASE_SUMMARY;
         this.showinfo = response.status;
 
       }, response => {
         this.showinfo = response.status;
       });
+    },
+    //filteredRows
+    pageStart: function() {
+        return (this.currPage - 1) * this.countOfPage;
+    }, //End of pageStart
+    totalPage: function() {
+        return Math.ceil(this.rows.length / this.countOfPage); 
+        //資料數除以一頁顯示幾筆等於總頁數
     }
   },
   methods: {
@@ -67,3 +79,12 @@ function initMap(data) {
     new google.maps.Marker(str);
   }
 }
+
+$("#gotop").on("click", function(e) { // gotop start
+    e.preventDefault();
+
+    $('html, body').animate({
+        scrollTop: $("html").offset().top
+    }, 500);
+
+});
