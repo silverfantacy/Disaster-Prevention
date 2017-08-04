@@ -35,7 +35,7 @@ var app = new Vue({
         return (this.currPage - 1) * this.countOfPage;
     }, //End of pageStart
     totalPage: function() {
-        return Math.ceil(this.rows.length / this.countOfPage); 
+        return Math.ceil(this.disasterData.length / this.countOfPage); 
         //資料數除以一頁顯示幾筆等於總頁數
     }
   },
