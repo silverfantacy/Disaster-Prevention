@@ -5,7 +5,7 @@ var app = new Vue({
   data: {
     area: '全部',
     disasterData: [],
-    countOfPage: 50, //一頁顯示50筆
+    countOfPage: 10, //一頁顯示50筆
     currPage: 1 //第一頁
   },
   created: function () {
@@ -14,10 +14,10 @@ var app = new Vue({
   },
   computed: {
     showList: function (a) {
-
+      // a是html裡的area
       var newList = [];
       var selectData = this.area;
-      // 篩選
+      // 篩選forEach寫法
       this.disasterData.forEach(function (item, i) {
         if (item.CaseLocationDistrict == selectData) {
           newList.push(item)
@@ -49,10 +49,21 @@ var app = new Vue({
       }, response => {
         this.showinfo = response.status;
       });
+    },
+    setPage: function (idx) {
+      if (idx <= 0 || idx > this.totalPage) {
+        return;
+      }
+      this.currPage = idx;
+    }, //End of setPage
+    reSetPage: function () {
+      this.currPage = 1;
+
+     //End of reSetPage
     }
   }
-  /*https://github.com/pagekit/vue-resource*/
-  /*VUE RESOURCE*/
+/*https://github.com/pagekit/vue-resource*/
+/*VUE RESOURCE*/
 })
 
 // Google Map API
