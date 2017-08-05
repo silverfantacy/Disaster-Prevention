@@ -4,18 +4,39 @@ var app = new Vue({
   el: '#app',
   data: {
     area: '全部',
-    disasterData: null,
-    showDisaster: null,
-    showinfo: null,
+    disasterData: [],
     countOfPage: 50, //一頁顯示50筆
-    currPage: 1, //第一頁
-    rows: []
+    currPage: 1 //第一頁
   },
   created: function () {
     //執行
     this.callData()
   },
   computed: {
+    showList: function (a) {
+
+      var newList = [];
+      var selectData = this.area;
+      // 篩選
+      this.disasterData.forEach(function (item, i) {
+        if (item.CaseLocationDistrict == selectData) {
+          newList.push(item)
+        }
+      });
+      // console.log(newList);
+      return newList;
+
+    },
+    //filteredRows
+    pageStart: function () {
+      return (this.currPage - 1) * this.countOfPage;
+    }, //End of pageStart
+    totalPage: function () {
+      return Math.ceil(this.showList.length / this.countOfPage);
+      //資料數除以一頁顯示幾筆等於總頁數
+    }
+  },
+  methods: {
     callData: function () {
       // GET /someUrl
       this.$http.get(apiUrl).then(response => {
@@ -23,30 +44,11 @@ var app = new Vue({
         // 獲取災害資訊，取得資料
         this.disasterData = response.body.DataSet['diffgr:diffgram'].NewDataSet.CASE_SUMMARY;
         initMap(this.disasterData);
-        this.rows = response.body.DataSet['diffgr:diffgram'].NewDataSet.CASE_SUMMARY;
         this.showinfo = response.status;
 
       }, response => {
         this.showinfo = response.status;
       });
-    },
-    //filteredRows
-    pageStart: function() {
-        return (this.currPage - 1) * this.countOfPage;
-    }, //End of pageStart
-    totalPage: function() {
-        return Math.ceil(this.rows.length / this.countOfPage); 
-        //資料數除以一頁顯示幾筆等於總頁數
-    }
-  },
-  methods: {
-    filterArea: function (item) {
-      //篩選區域
-      if (this.area == '全部') {
-        return true;
-      } else if (item.CaseLocationDistrict == this.area) {
-        return true;
-      }
     }
   }
   /*https://github.com/pagekit/vue-resource*/
@@ -80,11 +82,11 @@ function initMap(data) {
   }
 }
 
-$("#gotop").on("click", function(e) { // gotop start
-    e.preventDefault();
+$("#gotop").on("click", function (e) { // gotop start
+  e.preventDefault();
 
-    $('html, body').animate({
-        scrollTop: $("html").offset().top
-    }, 500);
+  $('html, body').animate({
+    scrollTop: $("html").offset().top
+  }, 500);
 
 });

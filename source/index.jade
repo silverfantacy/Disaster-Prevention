@@ -16,7 +16,7 @@ block content
                     span.area 區域
                     span.detail(style='text-align: center') 描述
                     span.location(style='text-align: center') 位置
-                .item(v-for='data in disasterData', v-if="filterArea(data)")
+                .item(v-for='data in showList')
                     span.time {{data.CaseTime}}
                     span.ts.primary.label.area {{data.CaseLocationDistrict}}
                     span.detail {{data.CaseDescription}}
@@ -26,14 +26,14 @@ block content
             //-     span.ts.primary.label.area 北投區
             //-     span.location 承德路七段往立德路方向，大度路二段(地標為測速照相機)，內線第1~2車道,交叉路口: 大業路 , 大度路
             //-     span.detail 路樹倒塌 造成市民車輛行車撞到受損(仍有1線車道可供通行)
-            //- .ts.basic.horizontally.fitted.padded.segment.center
-            //-     .ts.pagination.menu.horizontally.scrollable
-            //-         a.item(v-bind:class="{'disabled': (currPage === 1)}", @click.prevent='setPage(currPage-1)')
-            //-             | 上一頁
-            //-         a.item(v-for='n in totalPage', v-bind:class="{'active': (currPage === (n))}", @click.prevent='setPage(n)')
-            //-             | {{n}}
-            //-         //- a.item 2
-            //-         //- a.item 3
-            //-         a.item(v-bind:class="{'disabled': (currPage === totalPage)}", @click.prevent='setPage(currPage+1)')
-            //-             | 下一頁
+            .ts.basic.horizontally.fitted.padded.segment.center
+                .ts.pagination.menu.horizontally.scrollable
+                    a.item(v-bind:class="{'disabled': (currPage === 1)}", @click.prevent='setPage(currPage-1)')
+                        | 上一頁
+                    a.item(v-for='n in totalPage', v-bind:class="{'active': (currPage === (n))}", @click.prevent='setPage(n)')
+                        | {{n}}
+                    //- a.item 2
+                    //- a.item 3
+                    a.item(v-bind:class="{'disabled': (currPage === totalPage)}", @click.prevent='setPage(currPage+1)')
+                        | 下一頁
             i.ts.bottom.right.corner.big.angle.double.up.icon#gotop
