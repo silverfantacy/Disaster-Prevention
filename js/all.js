@@ -12,8 +12,9 @@ var app = new Vue({
       pageList: [], // 每頁的資料
       showinfo: [],
       countOfPage: 20, // 一頁顯示50筆
-      currPage: 0, // 當前頁數
-      totalPages: 0 // 總頁數的數字
+      currPage: 1, // 當前頁數
+      totalPages: 0, // 總頁數的數字
+      nowPages: 0
     };
   },
 
@@ -28,9 +29,9 @@ var app = new Vue({
       vm.pageList = [];
       // console.log(vm.newList,vm.pageList)
       // 計算總頁數(無條件捨棄)=總資料/每頁顯示幾筆
-      vm.totalPages = Math.floor(vm.newList.length / vm.countOfPage);
-      var start = vm.currPage * vm.countOfPage;
-      var end = vm.currPage * vm.countOfPage + vm.countOfPage;
+      vm.totalPages = Math.ceil(vm.newList.length / vm.countOfPage);
+      var start = vm.currPage * vm.countOfPage - vm.countOfPage;
+      var end = vm.currPage * vm.countOfPage;
       // console.log(start,end,vm.totalPages); 0,10,X
       vm.newList.forEach(function (item, i) {
         // 0~9筆資料
