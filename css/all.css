@@ -78,6 +78,7 @@ body {
   right: 20px;
   background-color: rgba(170, 170, 170, 0.5);
   border-radius: 50%;
+  z-index: 99;
   -webkit-transition: all 0.3s;
   transition: all 0.3s; }
   #gotop:hover, #gotop:active {
