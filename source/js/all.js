@@ -2,64 +2,91 @@ const apiUrl = 'https://tcgbusfs.blob.core.windows.net/blobfs/GetDisasterSummary
 
 var app = new Vue({
   el: '#app',
-  data: {
-    area: '全部',
-    disasterData: [],
-    countOfPage: 10, //一頁顯示50筆
-    currPage: 1 //第一頁
+  data() {
+      return{
+        area: '全部',
+        disasterData: [], // 原始資料
+        newList: [], // 第一次整理後的資料
+        pageList: [], // 每頁的資料
+        showinfo: [],
+        countOfPage: 20, // 一頁顯示50筆
+        currPage: 0, // 當前頁數
+        totalPages: 0  // 總頁數的數字
+      }
   },
   created: function () {
     //執行
     this.callData()
   },
   computed: {
-    showList: function (a) {
-      // a是html裡的area
-      var newList = [];
-      var selectData = this.area;
-      // 篩選forEach寫法
-      this.disasterData.forEach(function (item, i) {
-        if (item.CaseLocationDistrict == selectData) {
-          newList.push(item)
+    // 整理要顯示頁數的資料
+    showPageList: function () {
+      let vm =this;
+      vm.pageList=[];
+      // console.log(vm.newList,vm.pageList)
+      // 計算總頁數(無條件捨棄)=總資料/每頁顯示幾筆
+      vm.totalPages = Math.floor(vm.newList.length / vm.countOfPage);
+      var start = vm.currPage * vm.countOfPage;
+      var end = vm.currPage * vm.countOfPage + vm.countOfPage;
+      // console.log(start,end,vm.totalPages); 0,10,X
+      vm.newList.forEach(function (item, i) {
+        // 0~9筆資料
+        if(i>= start && i < end) {
+          vm.pageList.push(item)
         }
-      });
-      // console.log(newList);
-      return newList;
-
-    },
-    //filteredRows
-    pageStart: function () {
-      return (this.currPage - 1) * this.countOfPage;
-    }, //End of pageStart
-    totalPage: function () {
-      return Math.ceil(this.showList.length / this.countOfPage);
-      //資料數除以一頁顯示幾筆等於總頁數
+      })
+      // console.log(vm.newList, vm.pageList);
+      return vm.pageList;
     }
   },
   methods: {
     callData: function () {
+      var vm = this;
+
       // GET /someUrl
       this.$http.get(apiUrl).then(response => {
-
         // 獲取災害資訊，取得資料
-        this.disasterData = response.body.DataSet['diffgr:diffgram'].NewDataSet.CASE_SUMMARY;
-        initMap(this.disasterData);
-        this.showinfo = response.status;
-
+        vm.disasterData = response.body.DataSet['diffgr:diffgram'].NewDataSet.CASE_SUMMARY;
+        vm.showinfo = response.status;
+        vm.getList();
+        initMap(vm.disasterData);
       }, response => {
-        this.showinfo = response.status;
+        vm.showinfo = response.status;
       });
     },
+    // 整理剛得到的資料
+    getList: function () {
+      var vm = this;
+      vm.newList = [];
+      var selectData = vm.area;
+      // 篩選forEach寫法
+      if ( selectData === '全部'){
+        vm.newList = vm.disasterData;
+      }else{
+        // item是陣列的內容元素,i是索引
+        vm.disasterData.forEach(function (item, i) {
+          if (item.CaseLocationDistrict == selectData) {
+            vm.newList.push(item)
+          }
+        });
+      }
+      // console.log(newList);
+      return vm.newList;
+
+    },
+    // 控制上下頁的變換
     setPage: function (idx) {
-      if (idx <= 0 || idx > this.totalPage) {
+      // idx就是html的n
+      let vm =this;
+      if (idx <= 0 || idx > vm.totalPages) {
         return;
       }
-      this.currPage = idx;
-    }, //End of setPage
+      vm.currPage = idx;
+    },
+    // 起始顯示的頁數
     reSetPage: function () {
-      this.currPage = 1;
-
-     //End of reSetPage
+      let vm =this;
+      vm.currPage = 1;
     }
   }
 /*https://github.com/pagekit/vue-resource*/
@@ -93,11 +120,9 @@ function initMap(data) {
   }
 }
 
-$("#gotop").on("click", function (e) { // gotop start
+$("#gotop").on("click", function (e) {
   e.preventDefault();
-
   $('html, body').animate({
     scrollTop: $("html").offset().top
   }, 500);
-
 });

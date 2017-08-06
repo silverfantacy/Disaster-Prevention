@@ -1,39 +1,35 @@
 extends layout.jade
 block content
-    .wrap#app
-        .ts.heading.slate
-            span.header 颱風防災資訊平台
-            span.description 防災災情及相關諮詢電話：87863119 分機8900~8907
-            a.ts.button#mapBtn(href="map.html")
-                i.map.icon
-                | Map
-            select.ts.fluid.basic.dropdown(name='',v-model='area')
-                each iteam in area.list
-                    option(value='#{iteam}') #{iteam}
-            .ts.segmented.list
-                .selected.item 
-                    span.time 時間
-                    span.area 區域
-                    span.detail(style='text-align: center') 描述
-                    span.location(style='text-align: center') 位置
-                .item(v-for='data in showList')
-                    span.time {{data.CaseTime}}
-                    span.ts.primary.label.area {{data.CaseLocationDistrict}}
-                    span.detail {{data.CaseDescription}}
-                    span.location {{data.CaseLocationDescription}}
-            //- .item 
-            //-     span.time 2017-07-30 01:32:47 
-            //-     span.ts.primary.label.area 北投區
-            //-     span.location 承德路七段往立德路方向，大度路二段(地標為測速照相機)，內線第1~2車道,交叉路口: 大業路 , 大度路
-            //-     span.detail 路樹倒塌 造成市民車輛行車撞到受損(仍有1線車道可供通行)
-            .ts.basic.horizontally.fitted.padded.segment.center
-                .ts.pagination.menu.horizontally.scrollable
-                    a.item(v-bind:class="{'disabled': (currPage === 1)}", @click.prevent='setPage(currPage-1)')
-                        | 上一頁
-                    a.item(v-for='n in totalPage', v-bind:class="{'active': (currPage === (n))}", @click.prevent='setPage(n)')
-                        | {{n}}
-                    //- a.item 2
-                    //- a.item 3
-                    a.item(v-bind:class="{'disabled': (currPage === totalPage)}", @click.prevent='setPage(currPage+1)')
-                        | 下一頁
-            i.ts.bottom.right.corner.big.angle.double.up.icon#gotop
+    a.ts.button#mapBtn(href="map.html")
+        i.map.icon
+        | Map
+    select.ts.fluid.basic.dropdown(name='',v-model='area',@change="getList")
+        each iteam in area.list
+            option(value='#{iteam}') #{iteam}
+    .ts.segmented.list
+        .selected.item 
+            span.time 時間
+            span.area 區域
+            span.detail(style='text-align: center') 描述
+            span.location(style='text-align: center') 位置
+        .item(v-for='(list, i) in showPageList')
+            span.time {{list.CaseTime}}
+            span.ts.primary.label.area {{list.CaseLocationDistrict}}
+            span.detail {{list.CaseDescription}}
+            span.location {{list.CaseLocationDescription}}
+    //- .item 
+    //-     span.time 2017-07-30 01:32:47 
+    //-     span.ts.primary.label.area 北投區
+    //-     span.location 承德路七段往立德路方向，大度路二段(地標為測速照相機)，內線第1~2車道,交叉路口: 大業路 , 大度路
+    //-     span.detail 路樹倒塌 造成市民車輛行車撞到受損(仍有1線車道可供通行)
+    .ts.basic.horizontally.fitted.padded.segment.center
+        .ts.pagination.menu.horizontally.scrollable
+            a.item(v-bind:class="{'disabled': (currPage === 1)}", @click.prevent='setPage(currPage-1)')
+                | 上一頁
+            a.item(v-for='n in totalPages', v-bind:class="{'active': (currPage === (n))}", @click.prevent='setPage(n)')
+                | {{n}}
+            //- a.item 2
+            //- a.item 3
+            a.item(v-bind:class="{'disabled': (currPage === totalPages)}", @click.prevent='setPage(currPage+1)')
+                | 下一頁
+    i.ts.bottom.right.corner.big.angle.double.up.icon#gotop
