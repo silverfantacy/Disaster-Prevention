@@ -1,11 +1,7 @@
 extends layout.jade
 block content
-    .wrap#app
-        .ts.heading.slate
-            span.header 颱風防災資訊平台
-            span.description 防災災情及相關諮詢電話：87863119 分機8900~8907
-            a.ts.button#listBtn(href="index.html")
-                i.unordered.list.icon
-                | 列表
-            #map
+    a.ts.button#listBtn(href="index.html")
+        i.unordered.list.icon
+        | 列表
+    #map
     script(async='', defer='', src='https://maps.googleapis.com/maps/api/js?key=AIzaSyDGBgTYryuVxZBlDGdVN88dnoYWOMrjpQQ&callback=initMap')
