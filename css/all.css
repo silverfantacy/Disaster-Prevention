@@ -97,7 +97,7 @@ body {
   position: relative;
   display: block;
   margin-top: 20px; }
-  @media (max-width: 480px) {
+  @media (max-width: 768px) {
     .heading.slate {
       margin-top: 0; } }
 

@@ -53,7 +53,7 @@ var app = new Vue({
         vm.disasterData = response.body.DataSet['diffgr:diffgram'].NewDataSet.CASE_SUMMARY;
         vm.showinfo = response.status;
         vm.getList();
-        initMap(vm.disasterData);
+        vm.initMap(vm.disasterData);
       }, function (response) {
         vm.showinfo = response.status;
       });
@@ -90,37 +90,35 @@ var app = new Vue({
     reSetPage: function reSetPage() {
       var vm = this;
       vm.currPage = 1;
+    },
+    // Google Map API
+    initMap: function initMap(data) {
+      // 設定中心點座標
+      var map = new google.maps.Map(document.getElementById('map'), {
+        center: {
+          lat: 25.0329636,
+          lng: 121.5654268
+        },
+        zoom: 13
+      });
+      for (var i = 0; i < data.length; i++) {
+        var str = {};
+        var place = {};
+
+        place.lat = parseFloat(data[i].Wgs84Y);
+        place.lng = parseFloat(data[i].Wgs84X);
+
+        str.map = map;
+        str.title = data[i].Name;
+        str.position = place;
+        str.icon = 'https://developers.google.com/maps/documentation/javascript/images/circle.png';
+        // console.log(place);
+        new google.maps.Marker(str);
+      }
     }
     /*https://github.com/pagekit/vue-resource*/
     /*VUE RESOURCE*/
   } });
-
-// Google Map API
-
-function initMap(data) {
-  // 設定中心點座標
-  var map = new google.maps.Map(document.getElementById('map'), {
-    center: {
-      lat: 25.0329636,
-      lng: 121.5654268
-    },
-    zoom: 13
-  });
-  for (var i = 0; i < data.length; i++) {
-    var str = {};
-    var place = {};
-
-    place.lat = parseFloat(data[i].Wgs84Y);
-    place.lng = parseFloat(data[i].Wgs84X);
-
-    str.map = map;
-    str.title = data[i].Name;
-    str.position = place;
-    str.icon = 'https://developers.google.com/maps/documentation/javascript/images/circle.png';
-    // console.log(place);
-    new google.maps.Marker(str);
-  }
-}
 
 $("#gotop").hide();
 $(function () {
