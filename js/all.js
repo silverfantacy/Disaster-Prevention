@@ -122,6 +122,16 @@ function initMap(data) {
   }
 }
 
+$("#gotop").hide();
+$(function () {
+  $(window).scroll(function () {
+    if ($(this).scrollTop() > 1) {
+      $("#gotop").fadeIn();
+    } else {
+      $("#gotop").fadeOut();
+    }
+  });
+});
 $("#gotop").on("click", function (e) {
   e.preventDefault();
   $('html, body').animate({
