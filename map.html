@@ -18,6 +18,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocas-ui/2.3.2/tocas.css"/>
     <link href="css/all.css" rel="stylesheet"/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tocas-ui/2.3.2/tocas.js"></script>
+    <script type="text/javascript">
+      window.name = 'map';
+      //- console.log(window.name);
+    </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDGBgTYryuVxZBlDGdVN88dnoYWOMrjpQQ"></script>
   </head>
   <div id="loading">
@@ -31,11 +35,7 @@
   </div>
   <body>
     <div id="app" class="wrap">
-      <div class="ts heading slate"><span class="header">颱風防災資訊平台</span><span class="description">防災災情及相關諮詢電話：87863119 分機8900~8907</span>
-        <script type="text/javascript">
-          window.name = 'map';
-          //- console.log(window.name);
-        </script><a id="listBtn" href="index.html" class="ts button"><i class="unordered list icon"></i>列表</a>
+      <div class="ts heading slate"><span class="header">颱風防災資訊平台</span><span class="description">防災災情及相關諮詢電話：87863119 分機8900~8907</span><a id="listBtn" href="index.html" class="ts button"><i class="unordered list icon"></i>列表</a>
         <div id="map"></div><a href="http://data.taipei/" style="text-align: center" class="description">資料來源:臺北市府資訊</a>
       </div>
     </div>
