@@ -1,8 +1,9 @@
 extends layout.jade
-block content
+block jsScript
     script(type='text/javascript').
         window.name = 'map';
         //- console.log(window.name);
+block content
     a.ts.button#listBtn(href="index.html")
         i.unordered.list.icon
         | 列表

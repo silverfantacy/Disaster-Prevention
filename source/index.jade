@@ -1,8 +1,9 @@
 extends layout.jade
-block content
+block jsScript
     script(type='text/javascript').
         window.name = 'index';
         //- console.log(window.name);
+block content
     a.ts.button#mapBtn(href="map.html")
         i.map.icon
         | Map
