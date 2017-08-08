@@ -53,7 +53,9 @@ var app = new Vue({
         vm.disasterData = response.body.DataSet['diffgr:diffgram'].NewDataSet.CASE_SUMMARY;
         vm.showinfo = response.status;
         vm.getList();
-        vm.initMap(vm.disasterData);
+        if (window.name === 'map') {
+          vm.initMap(vm.disasterData);
+        }
       }, function (response) {
         vm.showinfo = response.status;
       });
