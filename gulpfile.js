@@ -115,7 +115,7 @@ gulp.task('browser-sync', function() {
 
 //壓縮圖片
 gulp.task('image-min', () =>
-    gulp.src('./source/images/*')
+    gulp.src('./source/images/**/**')
         .pipe($.if(options.env === 'production', $.imagemin())) //產品化時再壓縮
         .pipe(gulp.dest('./public/images'))
 );
